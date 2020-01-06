@@ -17,6 +17,6 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
     @Query("SELECT count(p.taskID) FROM Task p where p.project = :projectID")
     public Long getTotalTasksForProjectID(@Param("projectID") Project project);
 
-    @Query("SELECT count(p.taskID) FROM Task p where p.status = :taskStatus")
-    public Long getTotalCompletedTasksForProjectID(@Param("taskStatus") String taskStatus);
+    @Query("SELECT count(p.taskID) FROM Task p where p.status = :taskStatus and p.project = :projectID")
+    public Long getTotalCompletedTasksForProjectID(@Param("taskStatus") String taskStatus, @Param("projectID") Project project);
 }

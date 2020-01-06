@@ -142,6 +142,17 @@ public class ProjectManagerController {
         return ResponseEntity.ok(updatedTask);
     }
 
+    @PutMapping("/tasks/endTasks/{id}")
+    public ResponseEntity<Task> endTaskStatus(@PathVariable(value = "id") Long taskID,
+                                           @Valid @RequestBody Task taskDetails) throws ResourceNotFoundException {
+        Task task = tasksRepository.findById(taskID)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + taskID));
+
+        task.setStatus("Completed");
+        final Task updatedTask = tasksRepository.save(task);
+        return ResponseEntity.ok(updatedTask);
+    }
+
     @PostMapping("/createProject")
     public Project createProject(@Valid @RequestBody Project project) throws ResourceNotFoundException {
 

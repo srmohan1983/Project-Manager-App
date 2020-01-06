@@ -29,8 +29,8 @@ public class ProjectServiceImpl {
         return taskCount;
     }
 
-    public Long getCompletedTasksCount(String taskStatus) {
-        Long completedTaskCount = taskRepository.getTotalCompletedTasksForProjectID(taskStatus);
+    public Long getCompletedTasksCount(String taskStatus, Project project) {
+        Long completedTaskCount = taskRepository.getTotalCompletedTasksForProjectID(taskStatus, project);
         return completedTaskCount;
     }
 
@@ -42,7 +42,7 @@ public class ProjectServiceImpl {
             getProjectsResponse projectsResponse = new getProjectsResponse();
             projectsResponse.setProject(p);
             projectsResponse.setTasksCount(getCountofTasks(p));
-            projectsResponse.setCompletedTasksCount(getCompletedTasksCount("Completed"));
+            projectsResponse.setCompletedTasksCount(getCompletedTasksCount("Completed", p));
             projectResponseList.add(projectsResponse);
 
         }
